@@ -16,13 +16,17 @@ export default function MainPage() {
 		fetch(url)
 			.then((res) => res.json())
 			.then(data => {
+				console.log('FETCH')
 				if (userInput !== '') setUserInput('');
-				setUsers(data.results)
-				const filteredUsers = users.map(user => user);
-				return setFilteredUsers(filteredUsers);
+				return setUsers(data.results)
 			}
-			)
-	);
+			)); 
+	
+	useEffect(() => {
+		if(isLoading) return;
+		let mutableArray = users.map(user => user);
+		setFilteredUsers(mutableArray);
+	}, [data]);
 
 	const debouncedFilter = useCallback(debounce(query =>
 		setFilteredUsers(users.filter(
@@ -36,16 +40,16 @@ export default function MainPage() {
 	}
 
 	const handleInput = (e) => {
-		setUserInput(e.target.value);
+		setUserInput(e.target.value.trim());
 		doUserFilter(e.target.value);
 	}
-	console.log(users)
+	
 	if (isLoading) return <Loader />;
 	if (error) return `An error has occurred: ${error.message}`;
 	if (users.length === 0) return <div> No users found</div>
 	return (
 		<div className='data-container'>
-			<input className="search-input" type="text" value={userInput} onChange={handleInput} placeholder="Search"/>
+			<input className="search-input" type="text" value={userInput} onChange={handleInput} placeholder="Search" />
 			{filteredUsers.map((user) => (
 				<UserCard key={user.login.uuid} picture={user.picture.thumbnail} name={`${user.name.first} ${user.name.last}`} email={user.email} />
 			))}
