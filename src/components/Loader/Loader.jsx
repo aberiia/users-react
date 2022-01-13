@@ -3,6 +3,9 @@ import './Loader.css';
 
 export default function Loader() {
     return (
-        <div className="data-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div className="data-loader--wrapper">
+            <div className="data-loader"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+        
     )
 }
