@@ -1,5 +1,5 @@
 import React from 'react';
-import MainPage from './pages/MainPage/MainPage';
+import Try from './pages/MainPage/Try';
 import { QueryClient, QueryClientProvider } from "react-query";
 import './App.css';
 
@@ -15,7 +15,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
     <div className="App">
-      <MainPage />
+      <Try />
     </div>
     </QueryClientProvider>
   );
