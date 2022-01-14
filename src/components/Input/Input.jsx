@@ -4,7 +4,6 @@ import './Input.css';
 
 export default function Input(props) {
     const {inputType,focused, inputValue, inputState, handleInputChange, inputId, inputPlaceholder, handleInputClear, inputLabel, importantStatus} = props
-    if (inputType === "text") {
         return (
             <div className={"form-item"}>
                 <label htmlFor={inputId}
@@ -19,18 +18,5 @@ export default function Input(props) {
                 </div>
             </div>
         )
-    }
-    if (inputType === "number") {
-        return (
-            <div className={"form-item--numb"}>
-                <label htmlFor={inputId}
-                       className={"reg-text"}>{inputLabel}</label>
-                <input type={inputType} value={inputValue}
-                       onChange={handleInputChange}
-                       className="numb-input" name={inputId}
-                       id={inputId} placeholder={inputPlaceholder}/>
-                 <span className={"secondary-text-bright"}>minutes</span>
-            </div>
-        )
-    }
+    
 }

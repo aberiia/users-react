@@ -4,8 +4,8 @@ import Loader from '../../components/Loader/Loader';
 import { UserCard } from '../../components/UserCard/UserCard';
 import { LoadMoreButton } from '../../components/Buttons/LoadMoreButton';
 import './MainPage.css';
-const url = 'https://randomuser.me/api/?results=30';
 
+const url = 'https://randomuser.me/api/?results=30';
 
 export default function Try() {
   const [userInp, setUserInp] = useState('');

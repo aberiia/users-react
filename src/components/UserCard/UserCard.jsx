@@ -6,28 +6,8 @@ import './UserCard.css';
 
 
 export const UserCard = ({ picture, firstname, lastname, email, deleteButton, id, handleNameChange }) => {
-    const [editing, setEditing] = useState(false);
-    const [input, setInput] = useState(firstname);
     const [open, setOpen] = useState(false);
 
-    // useEffect(() => {
-    //     const body = document.querySelector('body');
-    //     body.style.overflow = open ? 'hidden' : 'auto';
-    //   }, [open]);
-
-    const handleEditMode = () => {
-        setEditing(!editing);
-    }
-
-    const handleInput = (e) => {
-        setInput(e.target.value);
-    }
-
-    const handleUpdateDone = (e) => {
-        if (e.key === "Enter" && input.length > 0) {
-            setEditing(false);
-        }
-    }
     return (
         <div className="user-data">
             <div className="thumbnail-wrapper">
