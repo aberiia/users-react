@@ -1,62 +1,62 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react'
 import { useQuery } from "react-query";
 import Loader from '../../components/Loader/Loader';
 import { UserCard } from '../../components/UserCard/UserCard';
 import { LoadMoreButton } from '../../components/Buttons/LoadMoreButton';
-import { debounce } from 'lodash';
-
 import './MainPage.css';
-export default function MainPage() {
-	const url = 'https://randomuser.me/api/?results=5';
-	const [users, setUsers] = useState([]);
-	const [filteredUsers, setFilteredUsers] = useState([]);
-	const [userInput, setUserInput] = useState('');
-
-	const { data, error, isLoading, refetch } = useQuery("data", () =>
-		fetch(url)
-			.then((res) => res.json())
-			.then(data => {
-				console.log('FETCH')
-				if (userInput !== '') setUserInput('');
-				console.log('data res ', data.results)
-				setUsers(data.results)
-				let mutableArray = users.map(user => user);
-
-				return setFilteredUsers(mutableArray);
-			}
-			));
+const url = 'https://randomuser.me/api/?results=2';
 
 
-	const debouncedFilter = useCallback(debounce(query =>
-		setFilteredUsers(users.filter(
-			user => `${user.name.first} ${user.name.last}`.trim().toLowerCase().includes(query?.toLowerCase())
-		)), 500), []
-	)
+export default function Try() {
+  const [userInp, setUserInp] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
 
-	const doUserFilter = query => {
-		if (!query) return setFilteredUsers([])
-		debouncedFilter(query)
-	}
+  const { data, error, isLoading, refetch } = useQuery("data", () =>
+    fetch(url)
+      .then((res) => res.json())
+      .then(data => data.results));
 
-	const handleInput = (e) => {
-		setUserInput(e.target.value);
-		doUserFilter(e.target.value);
-	}
+  useEffect(() => {
+    if (data) {
+      if (userInp !== '') setUserInp('');
+      setFilteredData([...data]);
+    }
+  }, [data]);
 
-	if (isLoading) return <Loader />;
-	if (error) return `An error has occurred: ${error.message}`;
-	if (users.length === 0) return <div> No users found</div>
-	return (
-		<div className='data-container'>
-			<input className="search-input" type="text" value={userInput} onChange={handleInput} placeholder="Search" />
-			{filteredUsers.length === 0 && users.map((user) => (
-				<UserCard key={user.login.uuid} picture={user.picture.thumbnail} name={`${user.name.first} ${user.name.last}`} email={user.email} />
-			))}
-			{filteredUsers.length > 0 && filteredUsers.map((user) => (
-				<UserCard key={user.login.uuid} picture={user.picture.thumbnail} name={`${user.name.first} ${user.name.last}`} email={user.email} />
-			))}
-			{userInput.length > 0 && filteredUsers.length === 0 && <p>Users not found :(</p>}
-			<LoadMoreButton handler={refetch} />
-		</div>
-	)
+  // changes userInput state 
+  const handleInput = (event) => setUserInp(event.target.value)
+  useEffect(() => {
+    !isLoading && setFilteredData(data);
+  }, [isLoading, data]);
+
+  //removes userCard from data list 
+  const handleDelete = (e) => {
+    const id = e.target.getAttribute("id")
+    setFilteredData(filteredData.filter(user => user.login.uuid !== id));
+  }
+
+  useEffect(() => {
+    data &&
+      setFilteredData(
+        [...data].filter((user) => {
+          if (!!userInp) {
+            let rg = new RegExp(userInp.toUpperCase());
+            return rg.test(user.name.first.toUpperCase());
+          }
+          return user;
+        })
+      );
+  }, [userInp]);
+  if (isLoading) return <Loader />;
+  if (error) return `An error has occurred: ${error.message}`;
+  if (filteredData.length === 0) return <div> No users found</div>
+  return (
+    <div className='data-container'>
+      <input className="search-input" type="text" value={userInp} onChange={handleInput} placeholder="Search" />
+      {filteredData.map((user) => (
+        <UserCard id={user.login.uuid} deleteButton={handleDelete} key={user.login.uuid} picture={user.picture.thumbnail} name={`${user.name.first} ${user.name.last}`} email={user.email} />
+      ))}
+      <LoadMoreButton handler={refetch} />
+    </div>
+  )
 }

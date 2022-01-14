@@ -3,18 +3,17 @@ import DeleteButton from '../Buttons/DeleteButton';
 import './UserCard.css';
 
 
-export const UserCard = ({picture, name, email, handler}) => {
-
+export const UserCard = ({ picture, name, email, deleteButton, id }) => {
     return (
         <div className="user-data">
             <div className="thumbnail-wrapper">
                 <img className="thumbnail" src={picture} alt={name} />
             </div>
             <div className="user-info">
-            <p className="user-name">{name}</p>
-            <p className="user-email">{email}</p>
+                <p className="user-name">{name}</p>
+                <p className="user-email">{email}</p>
             </div>
-            <DeleteButton click={handler} />
-		</div>
+            <DeleteButton id={id} actionDelete={deleteButton} />
+        </div>
     )
 }
