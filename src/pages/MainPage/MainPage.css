@@ -58,3 +58,10 @@
     outline: none;
     background:rgba(105, 136, 146, .2);
 }
+
+.message-notFound{
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(124, 124, 124);
+    text-align: center;
+}

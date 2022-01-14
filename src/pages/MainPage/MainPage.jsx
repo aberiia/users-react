@@ -4,7 +4,7 @@ import Loader from '../../components/Loader/Loader';
 import { UserCard } from '../../components/UserCard/UserCard';
 import { LoadMoreButton } from '../../components/Buttons/LoadMoreButton';
 import './MainPage.css';
-const url = 'https://randomuser.me/api/?results=2';
+const url = 'https://randomuser.me/api/?results=30';
 
 
 export default function Try() {
@@ -47,15 +47,18 @@ export default function Try() {
         })
       );
   }, [userInp]);
+
   if (isLoading) return <Loader />;
   if (error) return `An error has occurred: ${error.message}`;
-  if (filteredData.length === 0) return <div> No users found</div>
+  
   return (
     <div className='data-container'>
+     
       <input className="search-input" type="text" value={userInp} onChange={handleInput} placeholder="Search" />
       {filteredData.map((user) => (
         <UserCard id={user.login.uuid} deleteButton={handleDelete} key={user.login.uuid} picture={user.picture.thumbnail} name={`${user.name.first} ${user.name.last}`} email={user.email} />
       ))}
+       {filteredData.length === 0 && <p className="message-notFound"> No users found</p>}
       <LoadMoreButton handler={refetch} />
     </div>
   )
