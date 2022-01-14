@@ -1,0 +1,23 @@
+.input-wrapper{
+    display: flex;
+    align-items: center;
+    border: 1px solid rgb(207 207 207);
+    border-radius: 6px;
+}
+
+.input-clear{
+    width: 30px;
+    height: 30px;
+}
+
+.text-input{
+    border: none;
+    background: none;
+    font-size: 16px;
+    padding: 6px 0 6px 6px;
+    width: 100%;
+}
+
+.text-input:focus{
+    outline: none;
+}

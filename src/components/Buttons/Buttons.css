@@ -24,3 +24,25 @@
 .refresh-button:hover{
     background: rgb(207, 207, 207);
 }
+
+.button-action, .button-control{
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: 10px;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+
+.button-action{
+    color: white;
+    font-weight: 600;
+    background: rgb(134, 168, 177);
+}
+
+.button-control{
+    color: #333;
+}
+
+.button-disabled{
+    opacity: .5;
+}

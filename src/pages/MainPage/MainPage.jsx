@@ -11,7 +11,7 @@ export default function Try() {
   const [userInp, setUserInp] = useState('');
   const [filteredData, setFilteredData] = useState([]);
 
-  const { data, error, isLoading, refetch } = useQuery("data", () =>
+  const { data, error, status, isLoading, refetch } = useQuery("data", () =>
     fetch(url)
       .then((res) => res.json())
       .then(data => data.results));
@@ -35,6 +35,19 @@ export default function Try() {
     setFilteredData(filteredData.filter(user => user.login.uuid !== id));
   }
 
+  const handleEdit = (e, firstname,lastname) => {
+    const id = e.target.getAttribute("id");
+    
+    setFilteredData(filteredData.map(user => {
+        if (user.login.uuid === id) {
+          user.name.first = firstname
+          user.name.last = lastname
+        }
+        return user;
+      })
+    );
+  }
+
   useEffect(() => {
     data &&
       setFilteredData(
@@ -48,17 +61,22 @@ export default function Try() {
       );
   }, [userInp]);
 
+  console.log(status)
   if (isLoading) return <Loader />;
-  if (error) return `An error has occurred: ${error.message}`;
-  
+
+  if (error) {
+    return `An error has occurred: ${error.message}`;
+  }
+
+
   return (
     <div className='data-container'>
-     
+
       <input className="search-input" type="text" value={userInp} onChange={handleInput} placeholder="Search" />
       {filteredData.map((user) => (
-        <UserCard id={user.login.uuid} deleteButton={handleDelete} key={user.login.uuid} picture={user.picture.thumbnail} name={`${user.name.first} ${user.name.last}`} email={user.email} />
+        <UserCard handleNameChange={handleEdit} id={user.login.uuid} deleteButton={handleDelete} key={user.login.uuid} picture={user.picture.thumbnail} firstname={user.name.first} lastname={user.name.last} email={user.email} />
       ))}
-       {filteredData.length === 0 && <p className="message-notFound"> No users found</p>}
+      {filteredData.length === 0 && <p className="message-notFound"> No users found</p>}
       <LoadMoreButton handler={refetch} />
     </div>
   )
