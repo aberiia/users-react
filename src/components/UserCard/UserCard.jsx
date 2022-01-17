@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DeleteButton from '../Buttons/DeleteButton';
 import ModalForm from '../Modal/Modal';
+import { useSelector } from 'react-redux';
 import {ReactComponent as Edit} from "../../assets/edit.svg";
 import './UserCard.css';
 
 
 export const UserCard = ({ picture, firstname, lastname, email, deleteButton, id, handleNameChange }) => {
     const [open, setOpen] = useState(false);
-
+    const theme = useSelector((state) => state.theme);
     return (
-        <div className="user-data">
+        <div className={theme === "light" ? "user-data" : "user-data--dark"}>
             <div className="thumbnail-wrapper">
                 <img className="thumbnail" src={picture} alt={firstname} />
             </div>

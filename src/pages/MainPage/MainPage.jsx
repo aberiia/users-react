@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import Loader from '../../components/Loader/Loader';
 import { UserCard } from '../../components/UserCard/UserCard';
 import { LoadMoreButton } from '../../components/Buttons/LoadMoreButton';
+import { useSelector } from 'react-redux';
 import './MainPage.css';
 
 const url = 'https://randomuser.me/api/?results=30';
@@ -10,6 +11,7 @@ const url = 'https://randomuser.me/api/?results=30';
 export default function Try() {
   const [userInp, setUserInp] = useState('');
   const [filteredData, setFilteredData] = useState([]);
+  const theme = useSelector((state) => state.theme);  
 
   const { data, error, status, isLoading, refetch } = useQuery("data", () =>
     fetch(url)
@@ -72,7 +74,7 @@ export default function Try() {
   return (
     <div className='data-container'>
 
-      <input className="search-input" type="text" value={userInp} onChange={handleInput} placeholder="Search" />
+      <input className={theme ==="light"? "search-input": "search-input--dark" } type="text" value={userInp} onChange={handleInput} placeholder="Search" />
       {filteredData.map((user) => (
         <UserCard handleNameChange={handleEdit} id={user.login.uuid} deleteButton={handleDelete} key={user.login.uuid} picture={user.picture.thumbnail} firstname={user.name.first} lastname={user.name.last} email={user.email} />
       ))}

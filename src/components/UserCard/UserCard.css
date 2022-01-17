@@ -1,4 +1,4 @@
-.user-data{
+.user-data, .user-data--dark{
     position: relative;
     display: flex;
     align-items: center;
@@ -7,11 +7,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 20px;
-    box-shadow: 0 0 10px #00000020;
     border-radius: 8px;
 }
 
-.user-data + .user-data{
+.user-data{
+    box-shadow: 0 0 10px #00000020;
+}
+
+.user-data--dark{
+    background: #ffffff10;
+    box-shadow: none;
+}
+
+
+.user-data + .user-data, .user-data--dark + .user-data--dark{
     margin-top: 6px;
 }
 
@@ -35,6 +44,12 @@
     align-items: center;
 }
 
+.user-data .user-info .user-name{
+    color: #333;
+}
+.user-data--dark .user-info .user-name{
+    color: rgb(223, 223, 223);
+}
 .user-name, .user-email{
     margin: 0;
 }
@@ -42,7 +57,6 @@
 .user-info .user-name{
     font-size: 16px;
     font-weight: 600;
-    color: #333;
     margin-bottom: .2rem;
 }
 
@@ -52,7 +66,13 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: 14px;
+}
+
+.user-data .user-info .user-email{
     color: rgb(90, 90, 90);
+}
+.user-data--dark .user-info .user-email{
+    color: rgb(172, 200, 209);
 }
 .input-edit--firstname{
     font-family: 'Roboto', sans-serif;

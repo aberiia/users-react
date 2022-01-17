@@ -4,7 +4,7 @@ import './Input.css';
 
 export default function Input(props) {
     const {inputType,focused, inputValue, inputState, handleInputChange, inputId, inputPlaceholder, handleInputClear, inputLabel, importantStatus} = props
-        return (
+    return (
             <div className={"form-item"}>
                 <label htmlFor={inputId}
                        className={importantStatus ? "reg-text imp" : "reg-text"}>{inputLabel}</label>

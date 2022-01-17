@@ -46,3 +46,61 @@
 .button-disabled{
     opacity: .5;
 }
+
+
+.dark-mode{
+    background: black;
+    color: white;
+    --toggle-color: black;
+    --toggle-border: white;
+    --mode-content: "Dark Mode on";
+    transition: all 2s ease-in-out;
+  }
+  
+  body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 2s ease-in-out;
+  }
+  
+  .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .content h1{
+    text-align:center;
+  }
+  
+  .content p{
+    text-align: center;
+  }
+  
+  
+  /* ThemeButton */
+  label{
+      cursor: pointer;
+      max-width: 150px;
+  }
+ #input-theme-switch{
+     display: none;
+ }
+  .change-theme{
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem 2rem;
+  }
+  
+  .dark-span{
+      color: rgb(253, 159, 159);
+  }
+  
+  .light-span{
+      color:rgb(166, 199, 248);
+  }

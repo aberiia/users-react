@@ -45,18 +45,28 @@
     color: white;
 }
 
-.search-input{
+.search-input, .search-input--dark{
     padding: 1em;
     font-family: 'Roboto', sans-serif;
     border-radius: 10px;
-    background:rgba(105, 136, 146, .1);
     border: none;
     margin: 1em;
 }
-
+.search-input{
+    background:rgba(105, 136, 146, .1);
+}
 .search-input:focus{
     outline: none;
     background:rgba(105, 136, 146, .2);
+}
+
+.search-input--dark{
+    background:rgba(255, 255, 255, 0.1);
+    color: #ffffff80;
+}
+.search-input--dark:focus{
+    outline: none;
+    background: #e0e0e081;
 }
 
 .message-notFound{

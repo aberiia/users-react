@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import { useState, useCallback } from 'react';
-import Button from '../Buttons/Button';
+import Button from '../Buttons/ModalButton';
 import Input from '../Input/Input';
 
 import './Modal.css';
