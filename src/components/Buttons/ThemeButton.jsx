@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
-import store from '../../store/store';
-import './Buttons.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { applyTheme } from "../../actions/applyTheme";
+import "./Buttons.css";
 
-const dispatcher = (actionType, actionPayload) => {
-    return store.dispatch({type: actionType, payload: actionPayload})
-}
-const initialTheme = store.getState();
 export default function ThemeButton() {
-    const [theme, setTheme] = useState(initialTheme.theme);
-    
-    const handleThemeChange = () => {
-        localStorage.setItem("theme", JSON.stringify(theme));
-        
-        if(theme === "light"){
-            setTheme("dark");
-            dispatcher("SET_DARK_THEME", theme);
-        } else{
-            setTheme("light");
-            dispatcher("SET_LIGHT_THEME", theme);
-        }
-    }
-    return (
-        <div className="change-theme">
-            <label htmlFor="input-theme-switch">Click to change theme to {theme ==="light"? <span className='dark-span'>dark</span> : <span className='light-span'>light</span>}</label>
-            <input onClick={handleThemeChange} type="checkbox" id="input-theme-switch" />
-        </div>
-    )
+  const initTheme = useSelector((state) => state.theme);
+  const [theme, setTheme] = useState(initTheme);
+
+  const dispatch = useDispatch();
+  const changeTheme = (theme) => dispatch(applyTheme(theme));
+  const handleThemeChange = () => theme === "light" ? setTheme("dark") : setTheme("light")
+
+  useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify(theme));
+    changeTheme(theme);
+  }, [theme]);
+
+  return (
+    <div className="change-theme">
+      <label htmlFor="input-theme-switch">
+        Click to change theme to{" "}
+        {theme === "light" ? (
+          <span className="dark-span">dark</span>
+        ) : (
+          <span className="light-span">light</span>
+        )}
+      </label>
+      <input
+        onClick={handleThemeChange}
+        type="checkbox"
+        id="input-theme-switch"
+      />
+    </div>
+  );
 }

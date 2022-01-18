@@ -9,7 +9,7 @@ export default function Button({id, buttonClass, onClick, buttonValue, buttonTyp
                        className={buttonClass} type={buttonType}
                        value={buttonValue}/>
             )
-        case "close-modal":
+        default:
             return (
                 <button onClick={onClick}
                         className={buttonClass}>

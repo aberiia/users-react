@@ -2,16 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { connect, Provider } from "react-redux";
 import store from "./store/store";
-import { setLightTheme, setDarkTheme } from "./actions/applyTheme";
+import { applyTheme } from "./actions/applyTheme";
+import { getUsers } from "./actions/getUsers";
 import App from "./App";
 import "./index.css";
 
 const mapDispatchToProps = {
-  setDarkTheme,
-  setLightTheme,
+    getUsers,
+    applyTheme
 };
+connect(
+  null,
+  mapDispatchToProps
+)(App);
 
-connect(null, mapDispatchToProps)(App);
+
 
 ReactDOM.render(
   <Provider store={store}>

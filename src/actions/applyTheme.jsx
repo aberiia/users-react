@@ -1,9 +1,6 @@
-export const setLightTheme = (payload) => ({
-    type: "SET_LIGHT_THEME",
+export const applyTheme = (payload) => {
+  return {
+    type: "APPLY_APP_THEME",
     payload
-});
-
-export const setDarkTheme = (payload) => ({
-    type: "SET_DARK_THEME",
-    payload
-})
+  };
+};

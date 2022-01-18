@@ -1,12 +1,12 @@
-const initialTheme = localStorage.getItem("theme")? JSON.parse(localStorage.getItem("theme")): null;
+const initialTheme = localStorage.getItem("theme")
+  ? JSON.parse(localStorage.getItem("theme"))
+  : "light";
 
-export const themeReducer = (state = initialTheme , action) => {
-    switch (action.type) {
-        case "SET_LIGHT_THEME":
-            return state = "light";
-            case "SET_DARK_THEME":
-            return state = "dark";
-        default:
-            return state;
-    }
+export const themeReducer = (state = initialTheme, action) => {
+  switch (action.type) {
+    case "APPLY_APP_THEME":
+      return (state = action.payload);
+    default:
+      return state;
+  }
 };

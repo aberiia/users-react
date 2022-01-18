@@ -1,5 +1,4 @@
 import React from 'react';
-import { useFetch } from '../../hooks/useFetch/useFetch';
 import './Buttons.css';
 
 export function LoadMoreButton({handler}) {

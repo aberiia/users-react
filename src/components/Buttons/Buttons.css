@@ -92,6 +92,7 @@
  }
   .change-theme{
     position: absolute;
+    z-index: 2;
     display: flex;
     justify-content: flex-end;
     padding: 2rem 2rem;
