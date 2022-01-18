@@ -4,7 +4,7 @@ import { connect, Provider } from "react-redux";
 import store from "./redux/store/store";
 import { applyTheme } from "./redux/actions/applyTheme";
 import { getUsers } from "./redux/actions/getUsers";
-import App from "./App";
+import App from "./App.tsx";
 import "./index.css";
 
 const mapDispatchToProps = {

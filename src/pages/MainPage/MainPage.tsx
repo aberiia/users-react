@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import Loader from '../../components/Loader/Loader';
-import { UserCard } from '../../components/UserCard/UserCard';
-import { LoadMoreButton } from '../../components/Buttons/LoadMoreButton';
+import Loader from '../../components/Loader/Loader.tsx';
+import { UserCard } from '../../components/UserCard/UserCard.tsx';
+import { LoadMoreButton } from '../../components/Buttons/LoadMoreButton.tsx';
 import { useSelector,useDispatch } from 'react-redux';
 import { getUsers } from '../../redux/actions/getUsers';
 import './MainPage.css';
+import { RootState } from '../../redux/store/store';
 
 export default function MainPage() {
-  const theme = useSelector((state) => state.theme);  
+  const theme = useSelector((state: RootState) => state.theme);  
 
-  const {error, loading, users: initUsers}=useSelector(state=> state.users);
+  const {error, loading, users: initUsers}=useSelector((state: RootState) => state.users);
   
   // statuses
  

@@ -9,5 +9,5 @@ import thunk from 'redux-thunk';
     allReducers,
     applyMiddleware(thunk)
   )
-
+export type RootState = ReturnType<typeof store.getState>;
 export default store;

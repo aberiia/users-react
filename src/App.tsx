@@ -1,12 +1,13 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useSelector } from "react-redux";
-import MainPage from "./pages/MainPage/MainPage";
-import ThemeButton from "./components/Buttons/ThemeButton";
+import MainPage from "./pages/MainPage/MainPage.tsx";
+import ThemeButton from "./components/Buttons/ThemeButton.tsx";
 import "./App.css";
+import { RootState } from "./redux/store/store";
 
 function App() {
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state: RootState) => state.theme);
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {

@@ -1,12 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import { useState, useCallback } from 'react';
-import Button from '../Buttons/ModalButton';
-import Input from '../Input/Input';
+import Button from '../Buttons/ModalButton.tsx';
+import Input from '../Input/Input.tsx';
 
 import './Modal.css';
 
-export default function ModalForm({theme, id, onClose, submitHandler, isOpen, firstname, lastname }) {
+interface ModalForm {
+    theme: string,
+    id: string,
+    onClose: React.MouseEventHandler<HTMLButtonElement>,
+    submitHandler: React.MouseEventHandler<HTMLButtonElement>,
+    isOpen: boolean,
+    firstname: string,
+    lastname: string
+}
+
+const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOpen, firstname, lastname }: ModalForm) => {
     const [state, setState] = useState({
         "user-firstname": firstname,
         "user-lastname": lastname,
@@ -71,3 +81,5 @@ export default function ModalForm({theme, id, onClose, submitHandler, isOpen, fi
 
 
 }
+
+export default ModalForm;

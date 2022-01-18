@@ -1,6 +1,14 @@
 import React from 'react'
 
-export default function Button({id, buttonClass, onClick, buttonValue, buttonType}) {
+interface Button{
+    id: string,
+    buttonClass: string,
+    onClick: React.MouseEventHandler<HTMLButtonElement>,
+    buttonValue: string,
+    buttonType: string
+}
+
+const Button: React.FC<Button> = ({id, buttonClass, onClick, buttonValue, buttonType}: Button) => {
 
     switch (buttonType) {
         case "submit":
@@ -18,3 +26,5 @@ export default function Button({id, buttonClass, onClick, buttonValue, buttonTyp
             )
     }
 }
+
+export default Button;
