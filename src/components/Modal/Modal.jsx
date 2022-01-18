@@ -6,7 +6,7 @@ import Input from '../Input/Input';
 
 import './Modal.css';
 
-export default function ModalForm({ id, onClose, submitHandler, isOpen, firstname, lastname }) {
+export default function ModalForm({theme, id, onClose, submitHandler, isOpen, firstname, lastname }) {
     const [state, setState] = useState({
         "user-firstname": firstname,
         "user-lastname": lastname,
@@ -43,7 +43,7 @@ export default function ModalForm({ id, onClose, submitHandler, isOpen, firstnam
 
 
     return ReactDOM.createPortal(
-        <div className={"modal-wrapper"}>
+        <div className={theme === "light"? "modal-wrapper": "modal-wrapper--dark"}>
             <form action="#" className="card-modal">
                 <h3>Edit user data</h3>
                 {!state.valid && <span className="modal-error">Fill out user data</span>}
