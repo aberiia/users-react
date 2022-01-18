@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { applyTheme } from "../../actions/applyTheme";
+import { applyTheme } from "../../redux/actions/applyTheme";
 import "./Buttons.css";
 
 export default function ThemeButton() {

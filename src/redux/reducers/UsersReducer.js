@@ -16,7 +16,7 @@ const initialState = {
           ...state,
           loading: false,
           error: null,
-          users: [action.payload]
+          users: action.payload
         };
       case "GET_USERS_FAILURE":
         return {

@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import { useQuery } from "react-query";
 import Loader from '../../components/Loader/Loader';
 import { UserCard } from '../../components/UserCard/UserCard';
 import { LoadMoreButton } from '../../components/Buttons/LoadMoreButton';
 import { useSelector,useDispatch } from 'react-redux';
-import { getUsers } from '../../actions/getUsers';
+import { getUsers } from '../../redux/actions/getUsers';
 import './MainPage.css';
-import store from '../../store/store';
-
-const url = 'https://randomuser.me/api/?results=30';
 
 export default function MainPage() {
   const theme = useSelector((state) => state.theme);  
-  const initUsers = useSelector((state) => state.users);
+
+  const {error, loading, users: initUsers}=useSelector(state=> state.users);
+  
   // statuses
-  const loading = useSelector((state) => state.users.loading);
-  const error = useSelector((state) => state.users.error);
  
   const [userInp, setUserInp] = useState('');
-  const [filteredData, setFilteredData] = useState([] || initUsers.users[0]);
+  const [filteredData, setFilteredData] = useState([] || initUsers);
 
   // loading users on mount
   const dispatch = useDispatch();
@@ -27,9 +23,9 @@ export default function MainPage() {
   }, []);
 
   useEffect(() => {
-    if (initUsers.users[0]) {
+    if (initUsers) {
       if (userInp !== '') setUserInp('');
-      setFilteredData([...initUsers.users[0]]);
+      setFilteredData([...initUsers]);
     }
   }, [initUsers]);
 
@@ -56,9 +52,9 @@ export default function MainPage() {
   }
  
   useEffect(() => {
-    initUsers.users[0] &&
+    initUsers &&
       setFilteredData(
-        [...initUsers.users[0]].filter((user) => {
+        [...initUsers].filter((user) => {
           if (!!userInp) {
             let rg = new RegExp(userInp.toUpperCase());
             return rg.test(user.name.first.toUpperCase());

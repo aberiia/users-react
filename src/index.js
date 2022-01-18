@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { connect, Provider } from "react-redux";
-import store from "./store/store";
-import { applyTheme } from "./actions/applyTheme";
-import { getUsers } from "./actions/getUsers";
+import store from "./redux/store/store";
+import { applyTheme } from "./redux/actions/applyTheme";
+import { getUsers } from "./redux/actions/getUsers";
 import App from "./App";
 import "./index.css";
 
