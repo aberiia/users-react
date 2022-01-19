@@ -1,14 +1,15 @@
 import React from 'react'
 
 interface Button{
-    id: string,
+    id?: string,
     buttonClass: string,
-    onClick: React.MouseEventHandler<HTMLButtonElement>,
+    onClick?: React.MouseEventHandler<HTMLInputElement>,
+    handleClose?: React.MouseEventHandler<HTMLButtonElement>,
     buttonValue: string,
     buttonType: string
 }
 
-const Button: React.FC<Button> = ({id, buttonClass, onClick, buttonValue, buttonType}: Button) => {
+const Button: React.FC<Button> = ({id, handleClose, buttonClass, onClick, buttonValue, buttonType}: Button) => {
 
     switch (buttonType) {
         case "submit":
@@ -19,7 +20,7 @@ const Button: React.FC<Button> = ({id, buttonClass, onClick, buttonValue, button
             )
         default:
             return (
-                <button onClick={onClick}
+                <button onClick={handleClose}
                         className={buttonClass}>
                     {buttonValue}
                 </button>

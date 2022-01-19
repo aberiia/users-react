@@ -1,20 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import { useState, useCallback } from 'react';
-import Button from '../Buttons/ModalButton.tsx';
-import Input from '../Input/Input.tsx';
+import Button from '../Buttons/ModalButton';
+import Input from '../Input/Input';
 
 import './Modal.css';
-
 interface ModalForm {
     theme: string,
     id: string,
     onClose: React.MouseEventHandler<HTMLButtonElement>,
-    submitHandler: React.MouseEventHandler<HTMLButtonElement>,
+    submitHandler: submitHandlerInterface,
     isOpen: boolean,
     firstname: string,
     lastname: string
 }
+const modalRoot = document.getElementById("root") as HTMLElement; 
 
 const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOpen, firstname, lastname }: ModalForm) => {
     const [state, setState] = useState({
@@ -37,7 +37,7 @@ const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOp
         if (state["user-firstname"].length > 0 && state["user-lastname"].length > 0) {
             submitHandler(e, state['user-firstname'], state['user-lastname']);
             setState({ ...state, valid: true })
-            onClose();
+            onClose(e);
         } else {
             setState({ ...state, "valid": false })
         }
@@ -49,6 +49,7 @@ const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOp
         const id = e.currentTarget.id;
         setState({ ...state, [id]: '' })
     }, [state, setState]);
+
     if (!isOpen) return null;
 
 
@@ -72,12 +73,12 @@ const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOp
                 <div className="buttons-wrapper">
                     <Button id={id} buttonType={"submit"} onClick={handleClick}
                         buttonClass={"button-action"} buttonValue={"Save"} />
-                    <Button onClick={onClose} buttonValue={"Cancel"} buttonClass={"button-control"}
+                    <Button handleClose={onClose} buttonValue={"Cancel"} buttonClass={"button-control"}
                         buttonType={"close-modal"} />
                 </div>
             </form>
         </div>,
-        document.querySelector('#root'))
+        modalRoot)
 
 
 }

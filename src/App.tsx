@@ -1,8 +1,8 @@
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useSelector } from "react-redux";
-import MainPage from "./pages/MainPage/MainPage.tsx";
-import ThemeButton from "./components/Buttons/ThemeButton.tsx";
+import MainPage from "./pages/MainPage/MainPage";
+import ThemeButton from "./components/Buttons/ThemeButton";
 import "./App.css";
 import { RootState } from "./redux/store/store";
 
@@ -19,7 +19,7 @@ function App() {
   return (
       <QueryClientProvider client={queryClient}>
         <div className={theme === 'light' ? 'App': 'App-dark'}>
-          <ThemeButton theme={theme}/>
+          <ThemeButton {...theme}/>
           <MainPage />
         </div>
       </QueryClientProvider>

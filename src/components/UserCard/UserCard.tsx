@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import DeleteButton from "../Buttons/DeleteButton.tsx";
-import ModalForm from "../Modal/Modal.tsx";
+import DeleteButton from "../Buttons/DeleteButton";
+import ModalForm from "../Modal/Modal";
 import { useSelector } from "react-redux";
 import { ReactComponent as Edit } from "../../assets/edit.svg";
 import { RootState } from "../../redux/store/store";
 import "./UserCard.css";
+import {HandleEdit} from '../../types/Handlers';
 
 interface UserCard {
   picture: string,
   firstname: string,
   lastname: string,
   email: string,
-  deleteButton: React.MouseEventHandler<HTMLButtonElement>,
+  deleteButton: React.MouseEventHandler<HTMLDivElement>,
   id: string,
-  handleNameChange: React.ChangeEventHandler<HTMLInputElement>
+  handleNameChange: HandleEdit
 }
+
 export const UserCard: React.FC<UserCard>= ({
   picture,
   firstname,
@@ -55,7 +57,7 @@ export const UserCard: React.FC<UserCard>= ({
         onClose={() => setOpen(false)}
       />
 
-      <DeleteButton id={id} actionDelete={deleteButton} />
+      <DeleteButton id={id} handleDelete={deleteButton} />
     </div>
   );
 };
