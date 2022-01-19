@@ -15,7 +15,7 @@ function App() {
       },
     },
   });
-
+  
   return (
       <QueryClientProvider client={queryClient}>
         <div className={theme === 'light' ? 'App': 'App-dark'}>

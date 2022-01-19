@@ -91,7 +91,7 @@ export default function MainPage(): JSX.Element {
 
   return (
     <>
-      (
+      
       <div className="data-container">
         <input
           className={theme === "light" ? "search-input" : "search-input--dark"}
@@ -117,7 +117,7 @@ export default function MainPage(): JSX.Element {
         )}
         <LoadMoreButton handler={refetch} />
       </div>
-      )
+      
     </>
   );
 }

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 import ReactDOM from 'react-dom';
 import { useState, useCallback } from 'react';
 import Button from '../Buttons/ModalButton';
 import Input from '../Input/Input';
 import { SumbitHandler } from '../../types/Handlers';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
+
 import './Modal.css';
 interface ModalForm {
     theme: string,
@@ -22,6 +24,9 @@ const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOp
         "user-lastname": lastname,
         "valid": true
     });
+    // outside click handler
+    const ref = useRef<HTMLElement>();
+    useOutsideClick(ref, onClose);
 
     const handleChange = useCallback((evt) => {
         const value = evt.target.value;
@@ -55,7 +60,7 @@ const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOp
 
     return ReactDOM.createPortal(
         <div className={theme === "light"? "modal-wrapper": "modal-wrapper--dark"}>
-            <form action="#" className="card-modal">
+            <form ref={ref} action="#" className="card-modal">
                 <h3>Edit user data</h3>
                 {!state.valid && <span className="modal-error">Fill out user data</span>}
 
