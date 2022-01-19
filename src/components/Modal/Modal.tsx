@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { useState, useCallback } from 'react';
 import Button from '../Buttons/ModalButton';
 import Input from '../Input/Input';
-
+import { SumbitHandler } from '../../types/Handlers';
 import './Modal.css';
 interface ModalForm {
     theme: string,
     id: string,
     onClose: React.MouseEventHandler<HTMLButtonElement>,
-    submitHandler: submitHandlerInterface,
+    submitHandler: SumbitHandler,
     isOpen: boolean,
     firstname: string,
     lastname: string

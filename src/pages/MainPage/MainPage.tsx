@@ -8,6 +8,8 @@ import { InitUser } from "../../types/UserData";
 import "./MainPage.css";
 import { RootState } from "../../redux/store/store";
 
+type UsersArray = readonly InitUser[];
+
 export default function MainPage(): JSX.Element {
   const theme = useSelector((state: RootState) => state.theme);
 
@@ -20,7 +22,7 @@ export default function MainPage(): JSX.Element {
   // statuses
 
   const [userInp, setUserInp] = useState<string>("");
-  const [filteredData, setFilteredData] = useState<InitUser[]>([] || initUsers);
+  const [filteredData, setFilteredData] = useState<UsersArray>([] || initUsers);
   console.log("initUsers", initUsers);
 
   // loading users on mount

@@ -8,12 +8,12 @@ import "./UserCard.css";
 import {HandleEdit} from '../../types/Handlers';
 
 interface UserCard {
-  picture: string,
-  firstname: string,
-  lastname: string,
-  email: string,
+  readonly picture: string,
+  readonly firstname: string,
+  readonly lastname: string,
+  readonly email: string,
   deleteButton: React.MouseEventHandler<HTMLDivElement>,
-  id: string,
+  readonly id: string,
   handleNameChange: HandleEdit
 }
 
