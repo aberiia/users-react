@@ -5,14 +5,18 @@ import { LoadMoreButton } from "../../components/Buttons/LoadMoreButton";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsers } from "../../redux/actions/getUsers";
 import { InitUser } from "../../types/UserData";
-import "./MainPage.css";
 import { RootState } from "../../redux/store/store";
+import "./MainPage.css";
+import { deleteUser } from "../../redux/actions/deleteUser";
+import {updateUserInfo} from '../../redux/actions/updateUserInfo';
+import CreateNewUser from "../../components/Buttons/CreateNewUser";
+import {useNavigate} from 'react-router-dom';
 
 type UsersArray = readonly InitUser[];
 
 export default function MainPage(): JSX.Element {
   const theme = useSelector((state: RootState) => state.theme);
-
+  const navigate = useNavigate();
   const {
     error,
     loading,
@@ -43,27 +47,11 @@ export default function MainPage(): JSX.Element {
     setUserInp(event.target.value);
 
   //removes userCard from data list
-  const handleDelete = (e: Event & { target: HTMLDivElement }) => {
+  const handleDelete =  (e: Event & { target: HTMLDivElement }) => {
     const id = e.target.getAttribute("id");
-    setFilteredData(filteredData.filter((user) => user.login.uuid !== id));
-  };
-
-  const handleEdit = (
-    e: Event & { target: HTMLDivElement },
-    firstname: string,
-    lastname: string
-  ) => {
-    const id = e.target.getAttribute("id");
-
-    setFilteredData(
-      filteredData.map((user) => {
-        if (user.login.uuid === id) {
-          user.name.first = firstname;
-          user.name.last = lastname;
-        }
-        return user;
-      })
-    );
+    dispatch(deleteUser(id));
+    refetch();
+    // setFilteredData(filteredData.filter((user) => user.id !== id));
   };
 
   useEffect(() => {
@@ -100,15 +88,15 @@ export default function MainPage(): JSX.Element {
           onChange={handleInput}
           placeholder="Search"
         />
+        <CreateNewUser theme={theme}/>
         {filteredData.map((user) => (
           <UserCard
-            handleNameChange={handleEdit}
-            id={user.login.uuid}
+            id={user.id}
             deleteButton={handleDelete}
-            key={user.login.uuid}
-            picture={user.picture.thumbnail}
-            firstname={user.name.first}
-            lastname={user.name.last}
+            key={user.id}
+            picture={user.picture}
+            firstname={user.firstname}
+            lastname={user.lastname}
             email={user.email}
           />
         ))}

@@ -105,3 +105,23 @@
   .light-span{
       color:rgb(166, 199, 248);
   }
+
+  .create_new_user-button{
+      border-radius: 50%;
+      position: absolute;
+      right: 70px;
+      top: 66px;
+      font-size: 32px;
+      color: rgb(166, 199, 248);
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+  }
+
+  .create_new_user-button:hover{
+    color: rgb(253, 159, 159);
+  }

@@ -7,18 +7,20 @@ import { SumbitHandler } from '../../types/Handlers';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 import './Modal.css';
+import { updateUserInfo } from '../../redux/actions/updateUserInfo';
+import { useDispatch } from 'react-redux';
 interface ModalForm {
     theme: string,
     id: string,
     onClose: React.MouseEventHandler<HTMLButtonElement>,
-    submitHandler: SumbitHandler,
     isOpen: boolean,
     firstname: string,
     lastname: string
 }
 const modalRoot = document.getElementById("root") as HTMLElement; 
 
-const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOpen, firstname, lastname }: ModalForm) => {
+const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, isOpen, firstname, lastname }: ModalForm) => {
+    const dispatch = useDispatch();
     const [state, setState] = useState({
         "user-firstname": firstname,
         "user-lastname": lastname,
@@ -37,11 +39,15 @@ const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOp
     }, [state]);
 
     // form's submit button callback
-    const handleClick = useCallback((e) => {
-        e.preventDefault();
-        if (state["user-firstname"].length > 0 && state["user-lastname"].length > 0) {
-            submitHandler(e, state['user-firstname'], state['user-lastname']);
-            setState({ ...state, valid: true })
+    const handleFormSend = useCallback((e) => {
+        // e.preventDefault();
+        const firstname = state["user-firstname"];
+        const lastname = state["user-lastname"];
+        const id = e.target.id;
+        if (firstname.length > 0 && lastname.length > 0) {
+            console.log('ENTRIED')
+            dispatch(updateUserInfo(id, firstname,lastname));
+            // setState({ ...state, valid: true });
             onClose(e);
         } else {
             setState({ ...state, "valid": false })
@@ -76,7 +82,7 @@ const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, submitHandler, isOp
                     inputId={"user-lastname"} inputPlaceholder={lastname} />
 
                 <div className="buttons-wrapper">
-                    <Button id={id} buttonType={"submit"} onClick={handleClick}
+                    <Button id={id} buttonType={"submit"} onClick={handleFormSend}
                         buttonClass={"button-action"} buttonValue={"Save"} />
                     <Button handleClose={onClose} buttonValue={"Cancel"} buttonClass={"button-control"}
                         buttonType={"close-modal"} />

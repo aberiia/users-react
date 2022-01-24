@@ -14,7 +14,6 @@ interface UserCard {
   readonly email: string,
   deleteButton: React.MouseEventHandler<HTMLDivElement>,
   readonly id: string,
-  handleNameChange: HandleEdit
 }
 
 export const UserCard: React.FC<UserCard>= ({
@@ -24,14 +23,14 @@ export const UserCard: React.FC<UserCard>= ({
   email,
   deleteButton,
   id,
-  handleNameChange,
 }: UserCard) => {
   const [open, setOpen] = useState(false);
   const theme = useSelector((state: RootState) => state.theme);
   return (
     <div className={theme === "light" ? "user-data" : "user-data--dark"}>
       <div className="thumbnail-wrapper">
-        <img className="thumbnail" src={picture} alt={firstname} />
+        {picture? <img className={`thumbnail`} src={picture} alt={'img'} /> :
+        <div className="img-plug"></div>}
       </div>
       <div className="user-info">
         <div className="user-name--wrapper">
@@ -50,7 +49,6 @@ export const UserCard: React.FC<UserCard>= ({
       <ModalForm
         theme={theme}
         id={id}
-        submitHandler={handleNameChange}
         firstname={firstname}
         lastname={lastname}
         isOpen={open}
