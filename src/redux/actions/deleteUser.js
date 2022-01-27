@@ -1,10 +1,14 @@
 import axios from "axios";
+import { getUsers } from "./getUsers";
 
 const url = "http://localhost:8080/";
 
 export const deleteUser = (id) => {
   return (dispatch, getState) => {
     dispatch(deleteUserStarted());
+    // let limit = 3;
+    // let offset = +getState().users.offset;
+   
     axios
       .delete(`http://localhost:8080/${id}`,{
         headers: {
@@ -16,6 +20,7 @@ export const deleteUser = (id) => {
       })
       .then((res) => {
         dispatch(deleteUserSuccess(res));
+        // dispatch(getUsers(offset,limit))
       })
       .catch((err) => {
         dispatch(deleteUserFailure(err.message));

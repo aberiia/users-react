@@ -6,6 +6,8 @@ const url = "http://localhost:8080/";
 export const createNewUser = (id, firstname, lastname, birthDate, email) => {
   return (dispatch, getState) => {
     dispatch(createUserStarted());
+    let offset = +getState().users.offset + 1;
+    let limit = 1;
     axios
       .post(`${url}id=${id}&firstname=${firstname}&lastname=${lastname}&birthDate=${birthDate}&email=${email}`,{
         headers: {
@@ -20,7 +22,7 @@ export const createNewUser = (id, firstname, lastname, birthDate, email) => {
       })
       .then((res) => {
         dispatch(createUserSuccess(res));
-        dispatch(getUsers());
+        dispatch(getUsers(offset, limit));
       })
       .catch((err) => {
         dispatch(createUserFailure(err.message));

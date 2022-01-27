@@ -14,6 +14,7 @@ interface UserCard {
   readonly email: string,
   deleteButton: React.MouseEventHandler<HTMLDivElement>,
   readonly id: string,
+  offset: number
 }
 
 export const UserCard: React.FC<UserCard>= ({
@@ -23,6 +24,8 @@ export const UserCard: React.FC<UserCard>= ({
   email,
   deleteButton,
   id,
+  limit,
+  offset
 }: UserCard) => {
   const [open, setOpen] = useState(false);
   const theme = useSelector((state: RootState) => state.theme);
@@ -53,6 +56,8 @@ export const UserCard: React.FC<UserCard>= ({
         lastname={lastname}
         isOpen={open}
         onClose={() => setOpen(false)}
+        limit={limit}
+        offset = {offset}
       />
 
       <DeleteButton id={id} handleDelete={deleteButton} />

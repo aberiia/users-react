@@ -1,9 +1,11 @@
 import axios from "axios";
-
+import { getUsers } from "./getUsers";
 const url = "http://localhost:8080/";
 
 export const updateUserInfo = (userId, firstname, lastname) => {
   return (dispatch, getState) => {
+    let offset = +getState().users.offset;
+    let limit = +getState().users.limit - offset;
     dispatch(updateUserDataStarted());
     axios
       .post(`http://localhost:8080/userId=${userId}&firstname=${firstname}&lastname=${lastname}`,{
@@ -18,6 +20,7 @@ export const updateUserInfo = (userId, firstname, lastname) => {
       })
       .then((res) => {
         dispatch(updateUserDataSuccess(res));
+        dispatch(getUsers(offset, limit));
       })
       .catch((err) => {
         dispatch(updateUserDataFailure(err.message));

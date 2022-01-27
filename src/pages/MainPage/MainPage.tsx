@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Loader from "../../components/Loader/Loader";
 import { UserCard } from "../../components/UserCard/UserCard";
 import { LoadMoreButton } from "../../components/Buttons/LoadMoreButton";
@@ -6,33 +6,35 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUsers } from "../../redux/actions/getUsers";
 import { InitUser } from "../../types/UserData";
 import { RootState } from "../../redux/store/store";
-import "./MainPage.css";
 import { deleteUser } from "../../redux/actions/deleteUser";
-import {updateUserInfo} from '../../redux/actions/updateUserInfo';
 import CreateNewUser from "../../components/Buttons/CreateNewUser";
-import {useNavigate} from 'react-router-dom';
+
+import "./MainPage.css";
 
 type UsersArray = readonly InitUser[];
 
 export default function MainPage(): JSX.Element {
   const theme = useSelector((state: RootState) => state.theme);
-  const navigate = useNavigate();
+
   const {
     error,
     loading,
     users: initUsers,
+    count,
+    isEnd,
+    limit,
+    offset
   } = useSelector((state: RootState) => state.users);
-
   // statuses
 
   const [userInp, setUserInp] = useState<string>("");
   const [filteredData, setFilteredData] = useState<UsersArray>([] || initUsers);
   console.log("initUsers", initUsers);
-
+  console.log('count',count);
   // loading users on mount
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getUsers(limit, offset));
   }, []);
 
   useEffect(() => {
@@ -50,9 +52,12 @@ export default function MainPage(): JSX.Element {
   const handleDelete =  (e: Event & { target: HTMLDivElement }) => {
     const id = e.target.getAttribute("id");
     dispatch(deleteUser(id));
-    refetch();
     // setFilteredData(filteredData.filter((user) => user.id !== id));
   };
+
+  const loadMore = useCallback(() => {
+    dispatch(getUsers(limit, offset));
+  }, [offset]);
 
   useEffect(() => {
     initUsers &&
@@ -73,9 +78,6 @@ export default function MainPage(): JSX.Element {
     return <div>`An error has occurred: ${error.message}`</div>;
   }
 
-  const refetch = () => {
-    dispatch(getUsers());
-  };
 
   return (
     <>
@@ -98,12 +100,14 @@ export default function MainPage(): JSX.Element {
             firstname={user.firstname}
             lastname={user.lastname}
             email={user.email}
+            limit={limit}
+            offset ={offset}
           />
         ))}
         {filteredData.length === 0 && (
           <p className="message-notFound"> No users found</p>
         )}
-        <LoadMoreButton handler={refetch} />
+        {!isEnd && <LoadMoreButton handler={loadMore} />}
       </div>
       
     </>

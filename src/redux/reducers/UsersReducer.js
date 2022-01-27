@@ -2,9 +2,14 @@ const initialState = {
   loading: false,
   users: [],
   error: null,
+  count: 0,
+  isEnd: false, 
+  limit: 3,
+  offset: 0
 };
 
 export function usersReducer(state = initialState, action) {
+  console.log('payload',action.payload)
   switch (action.type) {
     case "USERS_ACTION_STARTED":
       return {
@@ -18,6 +23,23 @@ export function usersReducer(state = initialState, action) {
         error: null,
         users: action.payload,
       };
+      case "GET_USERS_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        users: [...state.users, ...action.payload.users],
+        count: action.payload.count ,
+        isEnd: action.payload.isEnd,
+        limit: action.payload.limit,
+        offset: action.payload.offset
+      };
+      case "GET_USERS_LIMIT": 
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      }
     case "USERS_ACTION_FAILURE":
       return {
         ...state,

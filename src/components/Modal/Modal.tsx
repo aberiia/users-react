@@ -9,17 +9,20 @@ import { useOutsideClick } from '../../hooks/useOutsideClick';
 import './Modal.css';
 import { updateUserInfo } from '../../redux/actions/updateUserInfo';
 import { useDispatch } from 'react-redux';
+import { getUsers } from '../../redux/actions/getUsers';
 interface ModalForm {
     theme: string,
     id: string,
     onClose: React.MouseEventHandler<HTMLButtonElement>,
     isOpen: boolean,
     firstname: string,
-    lastname: string
+    lastname: string,
+    limit: number,
+    offset: number
 }
 const modalRoot = document.getElementById("root") as HTMLElement; 
 
-const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, isOpen, firstname, lastname }: ModalForm) => {
+const ModalForm: React.FC<ModalForm> = ({theme, id,limit, offset, onClose, isOpen, firstname, lastname }: ModalForm) => {
     const dispatch = useDispatch();
     const [state, setState] = useState({
         "user-firstname": firstname,
@@ -47,7 +50,7 @@ const ModalForm: React.FC<ModalForm> = ({theme, id, onClose, isOpen, firstname, 
         if (firstname.length > 0 && lastname.length > 0) {
             console.log('ENTRIED')
             dispatch(updateUserInfo(id, firstname,lastname));
-            // setState({ ...state, valid: true });
+            setState({ ...state, valid: true });
             onClose(e);
         } else {
             setState({ ...state, "valid": false })

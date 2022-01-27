@@ -8,6 +8,6 @@ interface LoadMoreButton {
 export const LoadMoreButton: React.FC<LoadMoreButton> = ({handler}: LoadMoreButton) => {
     
     return (
-        <button className="refresh-button" onClick={handler}>Reload</button>
+        <button className="refresh-button" onClick={handler}>Load more</button>
     )
 }
