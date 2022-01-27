@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export function usersReducer(state = initialState, action) {
-  console.log('payload',action.payload)
+  console.log('state', state)
   switch (action.type) {
     case "USERS_ACTION_STARTED":
       return {
@@ -28,7 +28,7 @@ export function usersReducer(state = initialState, action) {
         ...state,
         loading: false,
         error: null,
-        users: [...state.users, ...action.payload.users],
+        users: action.payload.users,
         count: action.payload.count ,
         isEnd: action.payload.isEnd,
         limit: action.payload.limit,
@@ -55,13 +55,15 @@ export function usersReducer(state = initialState, action) {
     }
     case "USER_CREATED_SUCCESS": {
       return {
+        ...state,
         loading: false,
         error: null
       }
     }
     case "USER_DATA_UPDATED_SUCCESSFULLY": {
       return {
-        loading: false,
+        ...state,
+        loading: true,
         error: null
       }
     }

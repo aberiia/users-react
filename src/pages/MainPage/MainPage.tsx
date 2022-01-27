@@ -30,7 +30,6 @@ export default function MainPage(): JSX.Element {
   const [userInp, setUserInp] = useState<string>("");
   const [filteredData, setFilteredData] = useState<UsersArray>([] || initUsers);
   console.log("initUsers", initUsers);
-  console.log('count',count);
   // loading users on mount
   const dispatch = useDispatch();
   useEffect(() => {
@@ -57,7 +56,7 @@ export default function MainPage(): JSX.Element {
 
   const loadMore = useCallback(() => {
     dispatch(getUsers(limit, offset));
-  }, [offset]);
+  }, [limit,offset]);
 
   useEffect(() => {
     initUsers &&
@@ -75,7 +74,7 @@ export default function MainPage(): JSX.Element {
   if (loading) return <Loader />;
 
   if (error !== null) {
-    return <div>`An error has occurred: ${error.message}`</div>;
+    return <div>`An error has occurred: {error}`</div>;
   }
 
 

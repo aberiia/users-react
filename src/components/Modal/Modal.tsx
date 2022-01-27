@@ -48,14 +48,13 @@ const ModalForm: React.FC<ModalForm> = ({theme, id,limit, offset, onClose, isOpe
         const lastname = state["user-lastname"];
         const id = e.target.id;
         if (firstname.length > 0 && lastname.length > 0) {
-            console.log('ENTRIED')
             dispatch(updateUserInfo(id, firstname,lastname));
             setState({ ...state, valid: true });
             onClose(e);
         } else {
             setState({ ...state, "valid": false })
         }
-    }, [state]);
+    }, [state, setState, firstname, lastname]);
 
     // input's clear button callback
     const handleClear = useCallback(e => {

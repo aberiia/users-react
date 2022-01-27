@@ -14,6 +14,7 @@ interface UserCard {
   readonly email: string,
   deleteButton: React.MouseEventHandler<HTMLDivElement>,
   readonly id: string,
+  limit: number,
   offset: number
 }
 

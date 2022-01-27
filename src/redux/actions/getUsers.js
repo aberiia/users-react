@@ -4,7 +4,6 @@ export const getUsers = (limit, offset) => {
   const url = `http://localhost:8080/limit=${limit}&offset=${offset}`;
   return (dispatch, getState) => {
     dispatch(getUsersStarted());
-    console.log("current state: ", getState());
     axios
       .get(url)
       .then((res) => {
@@ -22,10 +21,6 @@ export const getUsers = (limit, offset) => {
 const getUsersSuccess = (users, count, isEnd,limit, offset) => ({
   type: "GET_USERS_SUCCESS",
   payload: { users: users, count: count, isEnd: isEnd, limit: limit, offset: offset },
-});
-
-const getUsersLimit = () => ({
-  type: "GET_USERS_LIMIT",
 });
 
 const getUsersStarted = () => ({

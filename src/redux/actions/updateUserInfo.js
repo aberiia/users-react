@@ -5,10 +5,12 @@ const url = "http://localhost:8080/";
 export const updateUserInfo = (userId, firstname, lastname) => {
   return (dispatch, getState) => {
     let offset = +getState().users.offset;
-    let limit = +getState().users.limit - offset;
+    
+    let limit = +getState().users.limit;
+    let previosOffset = offset - limit;
     dispatch(updateUserDataStarted());
     axios
-      .post(`http://localhost:8080/userId=${userId}&firstname=${firstname}&lastname=${lastname}`,{
+      .post(`${url}userId=${userId}&firstname=${firstname}&lastname=${lastname}`,{
         headers: {
             "Content-type": "application/json"
           },
@@ -20,7 +22,7 @@ export const updateUserInfo = (userId, firstname, lastname) => {
       })
       .then((res) => {
         dispatch(updateUserDataSuccess(res));
-        dispatch(getUsers(offset, limit));
+        dispatch(getUsers(limit, previosOffset));
       })
       .catch((err) => {
         dispatch(updateUserDataFailure(err.message));
@@ -28,9 +30,9 @@ export const updateUserInfo = (userId, firstname, lastname) => {
   };
 };
 
-const updateUserDataSuccess = (users) => ({
+const updateUserDataSuccess = (message) => ({
     type: "USER_DATA_UPDATED_SUCCESSFULLY",
-    payload: users,
+    payload: message,
   });
   
   const updateUserDataStarted = () => ({
