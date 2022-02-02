@@ -79,6 +79,14 @@ export function usersReducer(state = initialState, action) {
         error: null
       }
     }
+    case "LOGIN_SUCCESS": {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        user: action.payload.user
+      }
+    }
     default:
       return state;
   }

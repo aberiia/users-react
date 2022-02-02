@@ -1,8 +1,11 @@
 import React, { useCallback, useState } from "react";
-import Input from "../Input/Input";
-import { IInputState } from "../../types/IInput";
-import Button from "../Buttons/ModalButton";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Input from "../Input/Input";
+import Button from "../Buttons/ModalButton";
+import { logIn } from "../../redux/actions/login";
+
+import { IInputState } from "../../types/IInput";
 
 import "./LoginForm.css";
 export default function LoginForm() {
@@ -11,6 +14,7 @@ export default function LoginForm() {
     password: "",
     isValid: true,
   });
+  const dispatch = useDispatch();
 
   const handleClear = useCallback(
     (e) => {
@@ -31,6 +35,20 @@ export default function LoginForm() {
     },
     [state]
   );
+  const handleFormSend = useCallback(
+    (e) => {
+      e.preventDefault();
+      const login = state.login;
+      const password = state.password;
+      if (login.length > 0 && password.length > 0) {
+        dispatch(logIn(login, password));
+      } else {
+        setState({ ...state, valid: false });
+      }
+    },
+    [state, setState]
+  );
+
 
   return (
     <div className="login_form-wrapper">
@@ -59,7 +77,7 @@ export default function LoginForm() {
         <Link to="/reset" className="reset_link">
           Forgot password?
         </Link>
-        <Button buttonClass={"login-button"} buttonValue={"Login"} buttonType={"submit"} />
+        <Button onClick={handleFormSend} buttonClass={"login-button"} buttonValue={"Login"} buttonType={"submit"} />
       </form>
     </div>
   );
