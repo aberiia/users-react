@@ -1,20 +1,10 @@
 import React from "react";
 import {ReactComponent as Delete} from "../../assets/clear.svg";
+import { IInput } from "../../types/IInput";
 import './Input.css';
 
-interface Input{
-    inputType: string,
-    focused?: boolean,
-    inputValue: string,
-    inputState: string,
-    handleInputChange: React.ChangeEventHandler<HTMLInputElement>,
-    inputId: string,
-    inputPlaceholder: string,
-    handleInputClear: React.MouseEventHandler<HTMLButtonElement>,
-    inputLabel: string
-}
 
-export default function Input(props: Input) {
+export default function Input(props: IInput) {
     const {inputType,focused, inputValue, inputState, handleInputChange, inputId, inputPlaceholder, handleInputClear, inputLabel} = props
     return (
             <div className={"form-item"}>

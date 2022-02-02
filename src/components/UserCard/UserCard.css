@@ -33,6 +33,9 @@
 .thumbnail{
     border-radius: 50%;
     font-size: 0;
+    width: 40px;
+    height: 40px;
+    background-size: cover;
 }
 
 .img-plug{

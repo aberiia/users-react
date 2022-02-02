@@ -48,8 +48,9 @@ export default function MainPage(): JSX.Element {
     setUserInp(event.target.value);
 
   //removes userCard from data list
-  const handleDelete =  (e: Event & { target: HTMLDivElement }) => {
-    const id = e.target.getAttribute("id");
+  const handleDelete =  (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = e.target as HTMLInputElement
+    const id = el.getAttribute("id");
     dispatch(deleteUser(id));
     // setFilteredData(filteredData.filter((user) => user.id !== id));
   };
@@ -95,7 +96,7 @@ export default function MainPage(): JSX.Element {
             id={user.id}
             deleteButton={handleDelete}
             key={user.id}
-            picture={user.picture}
+            picture={"http://localhost:8080/api/users/getImage?path=6b2680cb9637e6551b28353a396a2d17.jpg"}
             firstname={user.firstname}
             lastname={user.lastname}
             email={user.email}

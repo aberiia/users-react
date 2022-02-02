@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getUsers } from "./getUsers";
+import { refetch } from "./refetch";
 const url = "http://localhost:8080/";
 
 export const updateUserInfo = (userId, firstname, lastname) => {
@@ -7,7 +7,8 @@ export const updateUserInfo = (userId, firstname, lastname) => {
     let offset = +getState().users.offset;
     
     let limit = +getState().users.limit;
-    let previosOffset = offset - limit;
+    let refetchLimit = offset;
+    let refetchOffset = 0;
     dispatch(updateUserDataStarted());
     axios
       .post(`${url}userId=${userId}&firstname=${firstname}&lastname=${lastname}`,{
@@ -22,7 +23,7 @@ export const updateUserInfo = (userId, firstname, lastname) => {
       })
       .then((res) => {
         dispatch(updateUserDataSuccess(res));
-        dispatch(getUsers(limit, previosOffset));
+        dispatch(refetch(refetchLimit, refetchOffset));
       })
       .catch((err) => {
         dispatch(updateUserDataFailure(err.message));
