@@ -26,6 +26,7 @@
 }
 
 .button-action, .button-control{
+    cursor: pointer;
     border: none;
     padding: .5rem 1rem;
     border-radius: 10px;
@@ -124,4 +125,22 @@
 
   .create_new_user-button:hover{
     color: rgb(253, 159, 159);
+  }
+
+  .login-button, .sign_up-button{
+    cursor: pointer;
+    border: none;
+    padding: .5rem 1rem;
+    background-color: #dbc198;
+    color: white;
+    width: 150px;
+    border-radius: 10px;
+    font-weight: 600;
+    align-self: center;
+  }
+  .sign_up-button{
+      margin-top: 1em;
+  }
+  .login-button:hover, .sign_up-button:hover{
+      background-color: #b49e7b;
   }

@@ -1,13 +1,19 @@
-interface IUserState {
-    "user-firstname": string;
-    "user-lastname": string;
-    valid: boolean;
-  }
+export interface IInputState {
+    "user-firstname"?: string;
+    "user-lastname"?: string;
+    valid?: boolean;
+    login?: string;
+    password?: string;
+    isValid?: boolean;
+    email?: string;
+    passwordConfirm?: string;
+}
+
 export interface IInput{
     inputType: string,
     focused?: boolean,
     inputValue: string,
-    inputState: IUserState,
+    inputState: IInputState,
     handleInputChange: React.ChangeEventHandler<HTMLInputElement>,
     inputId: string,
     inputPlaceholder: string,

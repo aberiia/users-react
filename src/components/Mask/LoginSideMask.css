@@ -1,0 +1,62 @@
+.mask-wrap--right, .mask-wrap--left{
+    width: 50%;
+    height: 100%;
+    position: relative;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+}
+.mask-image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.mask-wrap--blur{
+    width: 350px;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    background-color: #00000060;
+    transition: background-color .2s ease-in-out ;
+    border-radius: 0 10px 10px 0;
+}
+.mask-wrap--blur:hover{
+    background: #00000010;
+    transition: .2s ease-in;
+}
+.mask-wrap--right p, .mask-wrap--left p {
+    z-index: 3;
+    color: white;
+    font-weight: 600;
+    font-size: 32px;
+    text-align: center;
+    position: absolute;
+
+}
+.mask-wrap--right img, .mask-wrap--left img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.mask-wrap--right img {
+    border-radius: 0 10px 10px 0;
+}
+
+.mask-wrap--left img{
+    border-radius: 10px 0 0 10px;
+}
+
+.mask-wrap--right h2 {
+    position: absolute;
+}
+.mask-wrap--right{
+    right: 0;
+}
+.mask-wrap--left{
+    left: 0;
+}
+

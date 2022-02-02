@@ -1,0 +1,42 @@
+.login_form-wrapper{
+    display: inline-flex;
+    width: 50%;
+    height: 100%;
+    max-width: 50%;
+
+}
+
+.signup_form-wrapper{
+    display: inline-flex;
+    width: 50%;
+    right: 0;
+    height: 100%;
+    max-width: 50%;
+    align-self: flex-end;
+}
+
+.login_form {
+    display: flex;
+    width: 100%;
+    padding: 0 10%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-header{
+    color: #fff;
+    margin: 0;
+}
+.reset_link{
+    cursor: pointer;
+    align-self: flex-end;
+    font-size: 14px;
+    color: #ffffff60;
+    text-decoration: none;
+    padding-top: .2em;
+    padding-bottom: 1em;
+}
+
+.reset_link:hover{
+    color: #fff;
+}

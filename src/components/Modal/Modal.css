@@ -49,6 +49,8 @@
 }
 .form-item label{
     font-size: 14px;
+    display: block;
+    margin-bottom: .3em;
 }
 .modal-wrapper--dark .card-modal .form-item label{
     color: rgb(224, 224, 224);

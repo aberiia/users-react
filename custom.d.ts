@@ -4,3 +4,10 @@ declare module "*.svg" {
   const src: string;
   export default src;
 }
+
+declare module "*.jpg" {
+  import React = require('react');
+  export const ReactComponent: React.FC<React.IMGProps<ImageBitmapSource>>;
+  const src: string;
+  export default src;
+}
